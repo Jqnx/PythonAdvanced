@@ -1,30 +1,28 @@
 import requests
+import click
+from requests.models import Response
+from bs4 import BeautifulSoup
+import re
 
-def main() -> None:
-    id: int = int(input("Welke post wil je zien? "))
+@click.command()
+@click.argument('url')
+def main(url: str) -> None:
+    res = fetch(url)
+    words = get_words(res.text)
+    print(words)
 
-    post = get_post(id)
-    print(f"{post["title"]} ({post["views"]} views)")
+def fetch(url: str) -> Response | None:
+    try:
+        res = requests.get(url)
+        res.raise_for_status()
+        return res
+    except requests.exceptions.HTTPError as e:
+        print(f"Request failed with status code: {res.status_code}")
+        return
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {e}")
+        return
 
-    comments = get_comments(id)
-    for comment in comments:
-        print(f"- {comment["text"]}")
-
-def get_post(post_id: int):
-    r = requests.get("http://localhost:3000/posts")
-    json = r.json()
-    for post in json:
-        if int(post["id"]) == post_id:
-            return post
-
-def get_comments(post_id: int):
-    r = requests.get("http://localhost:3000/comments")
-    json = r.json()
-    comments: list = []
-    for comment in json:
-        if int(comment["postId"]) == post_id:
-            comments.append(comment)
-    return comments
-
-if __name__ == "__main__":
-    main()
+def get_words(input: str) -> list[str]:
+   html = BeautifulSoup(input, "html.parser")
+   return re.findall(r"\b\w+\b", html.get_text(","))

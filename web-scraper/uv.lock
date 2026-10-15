@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.14"
 resolution-markers = [
     "python_full_version >= '3.15'",
@@ -68,6 +68,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/8a/82/60367e58ef346a41ebc90d3f28593c1b8f5c2cb5314c7b2bbd98910ee131/ast_serialize-0.11.2-cp39-abi3-win32.whl", hash = "sha256:d70556a2f9230a44c99a655774cde823f056efc34466eabfb4085f0cb1ea9f99", size = 1125873, upload-time = "2026-09-13T18:48:50.661Z" },
     { url = "https://files.pythonhosted.org/packages/23/bf/b419c3205ce1143ba7c69baef4f0ba43c14d8712113bf34f9e0d27d609be/ast_serialize-0.11.2-cp39-abi3-win_amd64.whl", hash = "sha256:b9065dd23131a23b41f5bab3bf4e9b3c350a3fe8e36e8200eded9b729fcea484", size = 1165434, upload-time = "2026-09-13T18:48:52.169Z" },
     { url = "https://files.pythonhosted.org/packages/91/a7/c8bbb2173f7a7131b3b2412035b2d814ab5ef2ce9799bd06f07c451640e4/ast_serialize-0.11.2-cp39-abi3-win_arm64.whl", hash = "sha256:dab599cbdcb7b45b18c41fad746645580b3a24357082b7f0e8921cd373804f27", size = 1136031, upload-time = "2026-09-13T18:48:54.04Z" },
+]
+
+[[package]]
+name = "beautifulsoup4"
+version = "4.15.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "soupsieve" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/43/65/318323f98dbee45d42dff61d8f047181bc6f2268a9068cfad035a46be5af/beautifulsoup4-4.15.0.tar.gz", hash = "sha256:288e3ca7d54b06f2ac191970bc275c1939cb46d450b255bf6718b04aa37ab4f7", size = 632571, upload-time = "2026-06-07T16:44:20.453Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/88/c6/92fcd42f1ba33e1184263f25bfabf3d27c383410470f169e4b8163bf9c17/beautifulsoup4-4.15.0-py3-none-any.whl", hash = "sha256:d6f88de62e1d4e38ecb1077eb9724cd0eff29d2a08ca16a401e9b9e93f117cf9", size = 109924, upload-time = "2026-06-07T16:44:21.566Z" },
 ]
 
 [[package]]
@@ -362,6 +375,15 @@ wheels = [
 ]
 
 [[package]]
+name = "soupsieve"
+version = "3.0.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/5e/77/2dcfa996b01702ab8fd0763d84098f6a640d6162a328f1c04c2697579a1a/soupsieve-3.0.3.tar.gz", hash = "sha256:7dcf6022eed0399eb9934a75e020148f7a2024c37b7dfcd3cf2c5505d69c364e", size = 115923, upload-time = "2026-10-12T13:21:17.696Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/49/ca/f639c80449997b88aba7bc9705d25dd76cc0844f45f187862fd8f8bb18fa/soupsieve-3.0.3-py3-none-any.whl", hash = "sha256:fa30e3ba4809cb81ce1f3209f2fbe3e779fc445f0439bc147a0d7c4601743f21", size = 41705, upload-time = "2026-10-12T13:21:16.474Z" },
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -384,6 +406,7 @@ name = "web-scraper"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "beautifulsoup4" },
     { name = "click" },
     { name = "requests" },
 ]
@@ -396,6 +419,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "click", specifier = ">=8.5.0" },
     { name = "requests", specifier = ">=2.34.2" },
 ]
